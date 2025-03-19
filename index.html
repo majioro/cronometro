@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronômetro Regressivo</title>
+    <style>
+        /* Estilo geral da página */
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: #ffffff; /* Fundo branco */
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Caixa do cronômetro */
+        .container {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 20px 40px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Título */
+        h1 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #222;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo do timer */
+        #timer {
+            font-size: 48px;
+            font-weight: bold;
+            color: #d9534f;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 10px 30px;
+            border-radius: 10px;
+            display: inline-block;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mensagem final */
+        .expired {
+            color: #d9534f;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>⚠ Oferta expira em:</h1>
+        <span id="timer">10:00</span>
+    </div>
+
+    <script>
+        function startCountdown(duration) {
+            let timer = duration, minutes, seconds;
+            const display = document.getElementById("timer");
+
+            const interval = setInterval(() => {
+                minutes = Math.floor(timer / 60);
+                seconds = timer % 60;
+
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.textContent = "Tempo Esgotado!";
+                    display.classList.add("expired");
+                }
+            }, 1000);
+        }
+
+        window.onload = () => {
+            startCountdown(10 * 60); // 10 minutos
+        };
+    </script>
+
+</body>
+</html>
