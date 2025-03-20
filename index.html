@@ -72,7 +72,8 @@
                 minutes = Math.floor(timer / 60);
                 seconds = timer % 60;
 
-                seconds = seconds < 2 ? "0" + seconds : seconds;
+                // Corrigindo a formatação correta para sempre exibir dois dígitos nos segundos
+                seconds = seconds < 10 ? "0" + seconds : seconds;
                 display.textContent = minutes + ":" + seconds;
 
                 if (--timer < 0) {
@@ -84,9 +85,10 @@
         }
 
         window.onload = () => {
-            startCountdown(2 * 60); // 2 minutos
+            startCountdown(2 * 60); // Inicia com 2 minutos
         };
     </script>
 
 </body>
 </html>
+
